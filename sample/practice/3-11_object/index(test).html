@@ -16,20 +16,17 @@
 </header>
 <div class="main-wrapper">
 <section>
-	<h1>やることリスト</h1>
-	<ul id = "list">
-	<ul>
+	
 </section>
 </div><!-- /.main-wrapper -->
 <footer>JavaScript Samples</footer>
 <script>
-var todo = ['デザインカップ作成','データ整理','勉強会申し込み','牛乳買う'];
-	todo.push('歯医者に行く');
-for (var i = 0; i < todo.length; i++){
-	var li = document.createElement('li');				/*←htmlタグを生成*/
-	li.textContent = todo[i];							/*←liタグにi番目の配列を代入*/
-	document.getElementById('list').appendChild(li);	/*←生成したliタグをulの子要素として挿入*/
-}
+var jsbook = {title:'JavaScript入門',price: 2500,stock: 3};
+console.log(jsbook);
+console.log(jsbook.title);
+console.log(jsbook['price']);
+jsbook.stock = 10				/*←jsbook['stock']と書いても可*/
+console.log(jsbook.stock);
 </script>
 </body>
 </html>
