@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>template</title>
+<link href="../../_common/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+<div class="header-contents">
+<h1>カウントダウンタイマー</h1>
+<h2>1秒ごとに再計算する</h2>
+</div><!-- /.header-contents -->
+</header>
+<div class="main-wrapper">
+<section>
+	<p>いまから<span id="timer"></span>以内に注文すると50％オフ！</p>
+</section>
+</div><!-- /.main-wrapper -->
+<footer>JavaScript Samples</footer>
+<script>
+var countdown = function(due){
+	var now = new Date();										/*現在時刻を取得*/
+	
+	var rest = due.getTime() - now.getTime();					/*getTime...ミリ秒を取得、変数dueのミリ秒から変数nowのミリ秒を引いて変数restに代入*/
+	var sec = Math.floor(rest / 1000 % 60);						/*1000で割って全体の秒、60で割った余りを計算する*/
+	var min = Math.floor(rest / 1000 / 60) % 60;				/*1000で割って全体の秒、60で割って全体の分、60で割った余りを計算する*/
+	var hours = Math.floor(rest / 1000 / 60 / 60) % 24;			/*1000で割って全体の秒、60で割って全体の分、60で割って全体の時間、24で割った余りを計算する*/
+	var days = Math.floor(rest / 1000 / 60 / 60 / 24);			/*1000で割って全体の秒、60で割って全体の分、60で割って全体の時間、24で割って全体の日数を計算する*/
+	var count = [days,hours,min,sec];							
+	
+	return count;
+}
+
+var goal = new Date();				/*ゴール時間を設定するためまず現在日時でオブジェクトを初期化して、*/
+goal.setHours(23);					/*←それぞれ時、分、秒を未来の時間（最後の時間）に設定*/
+goal.setMinutes(59);
+goal.setSeconds(59);
+
+console.log(countdown(goal));
+var recalc = function() {
+	var counter = countdown(goal);												/*countdwonファンクションが計算した残り時間の配列を変数に代入*/
+	var time = counter[1] + '時間' + counter[2] + '分' + counter[3] + '秒';		/*変数counterに保存されたデータで文字列連結し変数timeに代入*/
+	document.getElementById('timer').textContent = time;						/*timeの内容をtimerのテキストコンテンツとして出力*/
+	refresh();
+}
+
+var refresh = function(){
+	setTimeout(recalc,1000);				/*待ち時間後にファンクションを一度だけ実行するメソッド*/
+}
+recalc();
+</script>
+</body>
+</html>
